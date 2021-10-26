@@ -1,13 +1,17 @@
 param (
     [Parameter()]
     [string]
-    $VcpkgPath = $PWD
+    $Repository = 'https://github.com/microsoft/vcpkg.git',
+
+    [Parameter()]
+    [string]
+    $Branch = 'master'
 )
 
 . $PSScriptRoot/scripts/Call.ps1
 . $PSScriptRoot/scripts/Git.ps1
 
-Git-Clone -Repository 'https://github.com/microsoft/vcpkg.git' -Branch 'master' -Name 'vcpkg' -Path $PSScriptRoot -RemoveIfInvalid -ForceSet
+Git-Clone -Repository $Repository -Branch $Branch -Name 'vcpkg' -Path $PSScriptRoot -RemoveIfInvalid -ForceSet
 
 # Set the environment variable for binary caching location
 $ArchivesPath = [System.IO.Path]::Join($PSScriptRoot, 'vcpkg', 'archives')
