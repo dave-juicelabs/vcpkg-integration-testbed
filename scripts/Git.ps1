@@ -56,7 +56,7 @@ function Git-Clone {
     if(!(Test-Path $ClonePath))
     {
         # Clone the repo
-        Verify-Call git clone $Repo $ClonePath
+        Verify-Call git clone $Repository $ClonePath
     }
 
     try
@@ -65,10 +65,10 @@ function Git-Clone {
 
         # Verify we have a good git repo connected to 
         $Origin = Verify-Call git remote get-url origin
-        if($Origin -ne $Repo -And $ForceSet)
+        if($Origin -ne $Repository -And $ForceSet)
         {
             # Set the url
-            Verify-Call git remote set-url origin $Repo
+            Verify-Call git remote set-url origin $Repository
         }
 
         # Fetch the commits
