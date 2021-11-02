@@ -24,4 +24,11 @@ if(!(Test-Path -Path $ArchivesPath))
 }
 
 # Bootstrap vcpkg to ensure it is correct
-Verify-Call $PSScriptRoot\vcpkg\bootstrap-vcpkg.bat
+if ($IsWindows)
+{
+    Verify-Call $PSScriptRoot\vcpkg\bootstrap-vcpkg.bat
+}
+else
+{
+    Verify-Call $PSScriptRoot\vcpkg\bootstrap-vcpkg.sh
+}
